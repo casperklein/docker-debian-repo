@@ -1,0 +1,7 @@
+Origin: Repo Demo
+Label: Repo Demo
+Codename: buster
+Architectures: amd64
+Components: main
+Description: Apt repository with a dummy package
+SignWith: 1E0C981E125F19237969875FA02C9B6DCB292E2D
