@@ -37,7 +37,11 @@ Add repository to apt sources
 
     At least, you have to set *SignWith* to your GPG subkey ID
 
-    ``gpg --fingerprint --fingerprint # get subkey ID``
+    ``gpg --fingerprint --fingerprint # show subkey ID (remove spaces)``
+
+    or
+
+    ``gpg --edit-key <ID> quit``
 
 1. Run own repository
 
