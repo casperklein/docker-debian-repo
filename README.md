@@ -2,11 +2,11 @@
 
 Docker image for running a Debian repositority based on [this](https://wiki.debian.org/DebianRepository/SetupWithReprepro) wiki page.
 
-## Build Docker container (optional)
+## Build Docker image (optional)
 
     make
 
-## Run Repo Demo
+## Run repository demo
 
     # Passphrase for GPG key: insecure
     docker run --rm -it -p 80:80 -v $PWD/repo-demo:/mnt:ro casperklein/debian-repo
@@ -21,22 +21,24 @@ Add repository to apt sources
 
     echo "deb http://HOSTNAME/repos/apt/debian/ $(lsb_release -cs) main" >> /etc/apt/sources.list
 
-## Create own repo
+## Create own repository
 
 1. Copy repo-demo
     
     ``cp -a repo-demo myrepo``
 
-1. Create/Export new gpg key
+1. Create/Export new GPG key
 
     ``gpg --gen-key``
 
     ``gpg -a -o myrepo/key.gpg --export-secret-keys <ID>``
 
-1. Edit *myrepo/distributions*
+1. Edit *myrepo/distributions* to your needs
 
-    ``# Get subkey ID``
-    ``gpg --fingerprint --fingerprint``
+    At least, you have to set *SignWith* to your GPG subkey ID
 
-1. Start container
+    ``gpg --fingerprint --fingerprint # get subkey ID``
+
+1. Run own repository
+
     ``docker run --rm -it -p 80:80 -v $PWD/myrepo:/mnt:ro casperklein/debian-repo``
