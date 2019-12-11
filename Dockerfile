@@ -26,7 +26,7 @@ FROM	scratch
 COPY	--from=build / /
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
-EXPOSE  80
+EXPOSE	80
 HEALTHCHECK --retries=1 CMD bash -c "</dev/tcp/localhost/80"
 
 CMD	["/run.sh"]
