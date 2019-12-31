@@ -17,7 +17,7 @@ COPY	rootfs /
 
 # Change web root to /var/www
 RUN	rm -rf /var/www/html
-RUN	sed -i 's;DocumentRoot.*;DocumentRoot /var/www/;g' /etc/apache2/sites-available/000-default.conf
+#RUN	sed -i 's;DocumentRoot.*;DocumentRoot /var/www/;g' /etc/apache2/sites-available/000-default.conf
 
 # Build final image
 RUN	apt-get -y install dumb-init \
