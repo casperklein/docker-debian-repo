@@ -2,7 +2,7 @@ FROM	debian:10-slim as build
 
 ENV	USER="casperklein"
 ENV	NAME="debian-repo"
-ENV	VERSION="0.1"
+ENV	VERSION="0.1.1"
 
 ENV	PACKAGES="apache2 reprepro"
 
