@@ -1,5 +1,12 @@
 # debian-repo
 
+![Version][version-shield]
+![Supports amd64 architecture][amd64-shield]
+![Supports aarch64 architecture][aarch64-shield]
+![Supports armhf architecture][armhf-shield]
+![Supports armv7 architecture][armv7-shield]
+![Docker image size][image-size-shield]
+
 Docker image for running a Debian repositority based on [this](https://wiki.debian.org/DebianRepository/SetupWithReprepro) wiki page.
 
 ## Build Docker image (optional)
@@ -46,3 +53,10 @@ Add repository to apt sources
 1. Run own repository
 
     ``docker run --rm -it -p 80:80 -v $PWD/myrepo:/mnt:ro casperklein/debian-repo``
+
+[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-blue.svg
+[amd64-shield]: https://img.shields.io/badge/amd64-yes-blue.svg
+[armhf-shield]: https://img.shields.io/badge/armhf-yes-blue.svg
+[armv7-shield]: https://img.shields.io/badge/armv7-yes-blue.svg
+[version-shield]: https://img.shields.io/github/v/release/casperklein/docker-debian-repo
+[image-size-shield]: https://img.shields.io/docker/image-size/casperklein/debian-repo/latest
