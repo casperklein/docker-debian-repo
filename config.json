@@ -1,0 +1,6 @@
+{
+  "user": "casperklein",
+  "name": "debian-repo",
+  "image": "casperklein/debian-repo",
+  "version": "0.1.1"
+}
