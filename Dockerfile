@@ -20,7 +20,10 @@ RUN	apt-get -y install dumb-init \
 &&	rm -rf /var/lib/apt/lists/*
 FROM	scratch
 COPY	--from=build / /
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+ENTRYPOINT ["dumb-init", "--"]
+
+ARG	VERSION
+LABEL	Version=$VERSION
 
 EXPOSE	80
 HEALTHCHECK --retries=1 CMD bash -c "</dev/tcp/localhost/80"
