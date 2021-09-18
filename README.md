@@ -16,14 +16,14 @@ Docker image for running a Debian repositority based on [this](https://wiki.debi
 ## Run repository demo
 
     # Passphrase for GPG key: insecure
-    docker run --rm -it -p 80:80 -v $PWD/repo-demo:/mnt:ro casperklein/debian-repo
+    docker run --rm -it -p 80:80 -v $PWD/repo-demo:/mnt:ro -e RELEASE=bullseye casperklein/debian-repo
 
-## Setup repository on client:
+## Setup repository on a client
 
 Import repository public key
 
     wget -O - http://HOSTNAME/repos/apt/debian/repo.gpg | apt-key add -
-    
+
 Add repository to apt sources
 
     echo "deb http://HOSTNAME/repos/apt/debian/ $(lsb_release -cs) main" >> /etc/apt/sources.list
@@ -31,28 +31,26 @@ Add repository to apt sources
 ## Create own repository
 
 1. Copy repo-demo
-    
-    ``cp -a repo-demo myrepo``
+
+    `cp -a repo-demo myrepo`
 
 1. Create/Export new GPG key
 
-    ``gpg --gen-key``
+    `gpg --gen-key`
 
-    ``gpg -a -o myrepo/key.gpg --export-secret-keys <ID>``
+    `gpg -a -o myrepo/key.gpg --export-secret-keys <ID>`
 
 1. Edit *myrepo/distributions* to your needs
 
     At least, you have to set *SignWith* to your GPG subkey ID
 
-    ``gpg --fingerprint --fingerprint # show subkey ID (remove spaces)``
+    `gpg --list-secret-key --with-subkey-fingerprint # show subkey ID`
 
-    or
-
-    ``gpg --edit-key <ID> quit``
+    If you change "Codename", you have to adjust `-e RELEASE=` below accordingly.
 
 1. Run own repository
 
-    ``docker run --rm -it -p 80:80 -v $PWD/myrepo:/mnt:ro casperklein/debian-repo``
+    `docker run --rm -it -p 80:80 -v $PWD/myrepo:/mnt:ro -e RELEASE=bullseye casperklein/debian-repo`
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-blue.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-blue.svg

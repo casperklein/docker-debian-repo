@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ -z "$RELEASE" ]; then
+	echo "Error: RELEASE not set."
+	echo
+	exit 1
+fi >&2
+
 set -ueo pipefail
 
 # import gpg key
@@ -14,13 +20,13 @@ cp /mnt/distributions conf/
 gpg -a --export -o repo.gpg
 
 # import packages
-reprepro includedeb buster /mnt/*.deb
+reprepro includedeb "$RELEASE" /mnt/*.deb
 kill $(pidof gpg-agent)
 echo
 echo
 
 echo 'Serving packages:'
-reprepro list buster
+reprepro list "$RELEASE"
 echo
 echo
 
