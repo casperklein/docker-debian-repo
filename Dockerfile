@@ -1,6 +1,6 @@
 FROM	debian:11-slim as build
 
-ENV	PACKAGES="apache2 reprepro"
+ARG	PACKAGES="apache2 reprepro"
 
 SHELL	["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -29,3 +29,10 @@ EXPOSE	80
 HEALTHCHECK --retries=1 CMD bash -c "</dev/tcp/localhost/80"
 
 CMD	["/run.sh"]
+
+ARG	VERSION="unknown"
+
+LABEL	org.opencontainers.image.description="Docker image for running a Debian repositority"
+LABEL	org.opencontainers.image.source="https://github.com/casperklein/docker-debian-repo/"
+LABEL	org.opencontainers.image.title="docker-debian-repo"
+LABEL	org.opencontainers.image.version="$VERSION"
