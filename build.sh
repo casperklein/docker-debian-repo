@@ -11,5 +11,5 @@ cd "$DIR"
 
 echo "Building: $TAG"
 echo
-docker build -t "$TAG" --build-arg VERSION="$VERSION" .
+docker build -t "$TAG" --build-arg VERSION="$VERSION" --provenance=false .
 docker tag "$TAG" "$IMAGE:latest"

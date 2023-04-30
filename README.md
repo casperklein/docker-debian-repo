@@ -7,40 +7,30 @@
 ![Supports armv7 architecture][armv7-shield]
 ![Docker image size][image-size-shield]
 
-Docker image for running a Debian repositority based on [this](https://wiki.debian.org/DebianRepository/SetupWithReprepro) wiki page.
+Docker image for running a Debian repository based on [this](https://wiki.debian.org/DebianRepository/SetupWithReprepro) wiki page.
 
-## Build Docker image (optional)
-
-    make
-
-## Run repository demo
+## Run a demo repository
 
     # Passphrase for GPG key: insecure
     docker run --rm -it -p 80:80 -v $PWD/repo-demo:/mnt:ro -e RELEASE=bullseye casperklein/debian-repo
 
-## Setup repository on a client
+## Build Docker image (optional)
 
-Import repository public key
+    ./build.sh
 
-    wget -O - http://HOSTNAME/repos/apt/debian/repo.gpg | apt-key add -
-
-Add repository to apt sources
-
-    echo "deb http://HOSTNAME/repos/apt/debian/ $(lsb_release -cs) main" >> /etc/apt/sources.list
-
-## Create own repository
+## Create and serve repository
 
 1. Copy repo-demo
 
     `cp -a repo-demo myrepo`
 
-1. Create/Export new GPG key
+2. Create/Export new GPG key
 
     `gpg --gen-key`
 
     `gpg -a -o myrepo/key.gpg --export-secret-keys <ID>`
 
-1. Edit *myrepo/distributions* to your needs
+3. Edit *myrepo/distributions* to your needs
 
     At least, you have to set *SignWith* to your GPG subkey ID
 
@@ -48,9 +38,19 @@ Add repository to apt sources
 
     If you change "Codename", you have to adjust `-e RELEASE=` below accordingly.
 
-1. Run own repository
+4. Serve repository via HTTP
 
     `docker run --rm -it -p 80:80 -v $PWD/myrepo:/mnt:ro -e RELEASE=bullseye casperklein/debian-repo`
+
+## Setup client
+
+### Import repository public key
+
+    wget -O - http://HOSTNAME/repos/apt/debian/repo.gpg | apt-key add -
+
+### Add repository to apt sources
+
+    echo "deb http://HOSTNAME/repos/apt/debian/ $(lsb_release -cs) main" >> /etc/apt/sources.list
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-blue.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-blue.svg
