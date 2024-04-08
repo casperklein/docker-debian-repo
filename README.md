@@ -12,7 +12,7 @@ Docker image for running a Debian repository based on [this](https://wiki.debian
 ## Run a demo repository
 
     # Passphrase for GPG key: insecure
-    docker run --rm -it -p 80:80 -v $PWD/repo-demo:/mnt:ro -e RELEASE=bullseye casperklein/debian-repo
+    docker run --rm -it -p 80:80 -v $PWD/repo-demo:/mnt:ro -e RELEASE=bookworm casperklein/debian-repo
 
 ## Build Docker image (optional)
 
@@ -40,7 +40,7 @@ Docker image for running a Debian repository based on [this](https://wiki.debian
 
 4. Serve repository via HTTP
 
-    `docker run --rm -it -p 80:80 -v $PWD/myrepo:/mnt:ro -e RELEASE=bullseye casperklein/debian-repo`
+    `docker run --rm -it -p 80:80 -v $PWD/myrepo:/mnt:ro -e RELEASE=bookworm casperklein/debian-repo`
 
 ## Setup client
 

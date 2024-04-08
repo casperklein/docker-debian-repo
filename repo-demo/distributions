@@ -1,6 +1,6 @@
 Origin: Repo Demo
 Label: Repo Demo
-Codename: bullseye
+Codename: bookworm
 Architectures: amd64
 Components: main
 Description: Apt repository with a dummy package
